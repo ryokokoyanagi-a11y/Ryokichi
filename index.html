@@ -1,412 +1,693 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>なんすかランド — THE NANSUKA OJISAN THEME PARK</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --amber-50: #FAEEDA;
-    --amber-100: #FAC775;
-    --amber-200: #EF9F27;
-    --amber-400: #BA7517;
-    --amber-600: #854F0B;
-    --amber-800: #633806;
-    --amber-900: #412402;
-    --bg: #FFF9F0;
-    --card: #ffffff;
-    --text: #2C2320;
-    --text-sub: #7A6255;
-    --border: rgba(65,36,2,0.12);
-    --radius-md: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Zen Maru Gothic', sans-serif; font-size: 15px; line-height: 1.7; }
-  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ryokichi's Portfolio — Theme Park Edition</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: #0d0d1a;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-  /* NAV */
-  nav { background: var(--amber-900); padding: 0 20px; position: sticky; top: 0; z-index: 100; }
-  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  .nav-logo { font-size: 18px; font-weight: 700; color: var(--amber-50); letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; }
-  .nav-logo .q { color: var(--amber-200); font-size: 22px; }
-  .nav-links { display: flex; gap: 4px; }
-  .nav-links a { color: var(--amber-100); font-size: 12px; text-decoration: none; padding: 6px 12px; border-radius: var(--radius-md); transition: background 0.2s; }
-  .nav-links a:hover { background: rgba(255,255,255,0.12); color: var(--amber-50); }
+    /* ===== CUSTOM PROPERTIES ===== */
+    :root {
+      --pink:   #ff3f9e;
+      --yellow: #ffe94d;
+      --cyan:   #00e5ff;
+      --purple: #a855f7;
+      --orange: #ff7e3f;
+      --green:  #39e57a;
+      --dark:   #0d0d1a;
+      --card-bg: rgba(255,255,255,0.05);
+    }
 
-  /* HERO */
-  .hero {
-    position: relative; overflow: hidden;
-    min-height: 520px;
-    display: flex; align-items: flex-end;
-  }
-  .hero-img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center top;
-  }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(65,36,2,0.92) 0%, rgba(65,36,2,0.5) 40%, rgba(65,36,2,0.1) 70%, transparent 100%);
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    width: 100%; padding: 48px 40px 52px;
-    text-align: center;
-  }
-  .hero-eyebrow {
-    display: inline-block;
-    background: rgba(239,159,39,0.85); color: var(--amber-900);
-    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
-    padding: 5px 18px; border-radius: 999px; margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-size: 52px; font-weight: 700; color: #fff;
-    line-height: 1.15; margin-bottom: 12px;
-    text-shadow: 0 3px 12px rgba(0,0,0,0.5);
-  }
-  .hero-desc { font-size: 16px; color: rgba(255,255,255,0.9); max-width: 480px; margin: 0 auto 12px; line-height: 1.8; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
-  .hero-pill {
-    display: inline-block;
-    background: var(--amber-200); color: var(--amber-900);
-    font-size: 22px; font-weight: 700;
-    padding: 8px 28px; border-radius: 999px;
-    margin: 10px 0 28px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    animation: pillpop 2s ease-in-out infinite alternate;
-  }
-  @keyframes pillpop { from { transform: scale(1); } to { transform: scale(1.04); } }
-  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn-main { background: var(--amber-200); color: var(--amber-900); font-size: 15px; font-weight: 700; font-family: inherit; padding: 14px 32px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.15s; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-  .btn-main:hover { transform: translateY(-2px); }
-  .btn-sub { background: rgba(255,255,255,0.15); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; padding: 14px 32px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s; }
-  .btn-sub:hover { background: rgba(255,255,255,0.25); }
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
 
-  /* STATS */
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 900px; margin: 16px auto; padding: 0 20px; }
-  .stat-c { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 10px; text-align: center; }
-  .stat-n { font-size: 26px; font-weight: 700; color: var(--amber-400); }
-  .stat-l { font-size: 11px; color: var(--text-sub); margin-top: 4px; line-height: 1.5; }
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      backdrop-filter: blur(16px);
+      background: rgba(13,13,26,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 900;
+      background: linear-gradient(90deg, var(--pink), var(--yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
 
-  /* SECTIONS */
-  .section { padding: 52px 0 24px; }
-  .sec-head { text-align: center; margin-bottom: 28px; }
-  .sec-tag { display: inline-block; background: var(--amber-50); color: var(--amber-600); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; padding: 4px 14px; border-radius: 999px; margin-bottom: 10px; border: 1px solid rgba(133,79,11,0.2); }
-  .sec-head h2 { font-size: 26px; font-weight: 700; color: var(--text); }
-  .sec-head p { font-size: 13px; color: var(--text-sub); margin-top: 6px; }
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 7rem 2rem 4rem;
+    }
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.35; pointer-events: none;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--pink);   top: -200px; left: -150px; animation: float1 8s ease-in-out infinite; }
+    .orb-2 { width: 500px; height: 500px; background: var(--purple); bottom: -150px; right: -100px; animation: float2 10s ease-in-out infinite; }
+    .orb-3 { width: 350px; height: 350px; background: var(--cyan);   top: 40%;  left: 55%;  animation: float3 7s ease-in-out infinite; }
+    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(40px,-30px) scale(1.05)} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-30px,40px) scale(1.08)} }
+    @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,-20px) scale(0.95)} }
 
-  /* AREAS */
-  .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
-  .area-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
-  .area-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(65,36,2,0.1); }
-  .area-header { padding: 18px 18px 12px; display: flex; gap: 14px; align-items: flex-start; }
-  .area-icon { font-size: 30px; flex-shrink: 0; }
-  .area-header h3 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-  .area-header .sub { font-size: 11px; color: var(--text-sub); line-height: 1.5; }
-  .area-body { padding: 0 18px 16px; }
-  .area-list { list-style: none; }
-  .area-list li { font-size: 12px; color: var(--text-sub); padding: 5px 0; border-top: 1px solid var(--border); display: flex; gap: 7px; align-items: flex-start; line-height: 1.6; }
-  .area-list li::before { content: '?'; color: var(--amber-200); font-weight: 700; flex-shrink: 0; }
-  .area-special { margin-top: 10px; background: var(--amber-50); border-radius: var(--radius-md); padding: 8px 12px; font-size: 11px; color: var(--amber-600); font-weight: 500; border: 1px solid rgba(133,79,11,0.15); }
-  .area-special b { color: var(--amber-900); }
+    /* Stars */
+    .stars-canvas {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    }
 
-  /* ATTRACTIONS */
-  .main-attractions { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
-  .main-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
-  .main-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(65,36,2,0.1); }
-  .main-thumb { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 44px; }
-  .mc1 { background: var(--amber-200); }
-  .mc2 { background: var(--amber-100); }
-  .main-body { padding: 18px; }
-  .main-body h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
-  .catch { font-size: 13px; font-weight: 700; color: var(--amber-400); margin-bottom: 10px; font-style: italic; }
-  .main-list { list-style: none; }
-  .main-list li { font-size: 12px; color: var(--text-sub); padding: 5px 0; border-top: 1px solid var(--border); display: flex; gap: 7px; line-height: 1.6; }
-  .main-list li::before { content: '→'; color: var(--amber-200); font-weight: 700; flex-shrink: 0; }
-  .caution { margin-top: 12px; background: var(--amber-100); border-radius: var(--radius-md); padding: 8px 12px; font-size: 11px; color: var(--amber-800); font-weight: 500; }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 780px;
+    }
+    .badge {
+      display: inline-block;
+      padding: .35rem 1rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--yellow);
+      color: var(--yellow);
+      font-size: .8rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeInDown .6s ease both;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.03em;
+      animation: fadeInUp .7s ease .1s both;
+    }
+    .hero-title .line-grad {
+      background: linear-gradient(90deg, var(--pink) 0%, var(--yellow) 50%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      margin: 1.5rem auto;
+      font-size: 1.15rem; color: rgba(255,255,255,0.65);
+      max-width: 520px; line-height: 1.7;
+      animation: fadeInUp .7s ease .2s both;
+    }
+    .hero-buttons {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 2rem;
+      animation: fadeInUp .7s ease .3s both;
+    }
+    .btn-primary {
+      padding: .85rem 2.2rem;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff; font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 999px; cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 30px rgba(255,63,158,0.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255,63,158,0.6); }
+    .btn-outline {
+      padding: .85rem 2.2rem;
+      background: transparent;
+      color: #fff; font-weight: 700; font-size: 1rem;
+      border: 1.5px solid rgba(255,255,255,0.3); border-radius: 999px;
+      cursor: pointer; text-decoration: none;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .btn-outline:hover { border-color: var(--cyan); background: rgba(0,229,255,0.07); transform: translateY(-3px); }
 
-  /* SYMBOL */
-  .symbol-card { background: var(--amber-900); border-radius: var(--radius-xl); padding: 36px 40px; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
-  .symbol-left { flex: 1; min-width: 200px; }
-  .sym-tag { display: inline-block; background: var(--amber-200); color: var(--amber-900); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }
-  .symbol-left h3 { font-size: 22px; font-weight: 700; color: var(--amber-50); line-height: 1.4; margin-bottom: 10px; }
-  .symbol-left p { font-size: 13px; color: var(--amber-100); line-height: 1.8; }
-  .symbol-right { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 220px; }
-  .sym-stat { background: rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
-  .sym-num { font-size: 22px; font-weight: 700; color: var(--amber-100); }
-  .sym-label { font-size: 11px; color: var(--amber-200); margin-top: 4px; line-height: 1.4; }
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: rgba(255,255,255,0.4); font-size: .75rem;
+      animation: bounce 2s ease-in-out infinite;
+      z-index: 1;
+    }
+    .scroll-hint::after {
+      content: ''; display: block; width: 2px; height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
-  /* KENTEI */
-  .kentei-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 28px 32px; display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
-  .kentei-left { flex: 1; min-width: 200px; }
-  .kentei-left h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .kentei-left p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
-  .kentei-right { display: flex; flex-direction: column; gap: 8px; min-width: 220px; }
-  .grade { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-  .grade-name { font-size: 14px; font-weight: 700; color: var(--text); }
-  .grade-desc { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
-  .grade-badge { font-size: 11px; background: var(--amber-50); color: var(--amber-600); padding: 3px 10px; border-radius: 999px; font-weight: 700; flex-shrink: 0; border: 1px solid rgba(133,79,11,0.2); }
+    /* ===== SECTIONS ===== */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      font-size: .75rem; font-weight: 800; letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--cyan); margin-bottom: .6rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: rgba(255,255,255,0.55); font-size: 1rem; line-height: 1.7;
+      max-width: 560px;
+    }
+    .divider {
+      width: 60px; height: 4px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--yellow));
+      margin: 1.2rem 0 2.5rem;
+    }
 
-  /* TICKETS */
-  .tickets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-  .tkt-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 24px 20px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
-  .tkt-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(65,36,2,0.1); }
-  .tkt-card.feat { border: 2.5px solid var(--amber-200); }
-  .tkt-badge { display: inline-block; background: var(--amber-50); color: var(--amber-600); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 10px; border: 1px solid rgba(133,79,11,0.2); }
-  .tkt-badge.hot { background: var(--amber-100); color: var(--amber-800); }
-  .tkt-name { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .tkt-price { font-size: 34px; font-weight: 700; color: var(--amber-400); }
-  .tkt-price span { font-size: 13px; color: var(--text-sub); font-weight: 400; }
-  .tkt-features { list-style: none; margin: 14px 0; text-align: left; }
-  .tkt-features li { font-size: 12px; color: var(--text-sub); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 7px; line-height: 1.5; }
-  .tkt-features li:last-child { border-bottom: none; }
-  .ck { color: var(--amber-400); font-size: 13px; flex-shrink: 0; font-weight: 700; }
-  .btn-tkt { width: 100%; padding: 12px; border-radius: 999px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: transform 0.15s; border: none; }
-  .btn-tkt:hover { transform: scale(1.02); }
-  .btn-tkt.p { background: var(--amber-200); color: var(--amber-900); }
-  .btn-tkt.g { background: transparent; color: var(--amber-400); border: 2px solid var(--amber-400); }
+    /* ===== ABOUT ===== */
+    #about { background: rgba(255,255,255,0.02); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+    }
+    @media(max-width:768px){ .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-avatar {
+      position: relative; width: 280px; height: 280px; margin: 0 auto;
+    }
+    .avatar-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(var(--dark),var(--dark)) padding-box,
+                  linear-gradient(135deg,var(--pink),var(--cyan),var(--yellow)) border-box;
+      animation: spinRing 8s linear infinite;
+    }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
+    .avatar-inner {
+      position: absolute; inset: 12px; border-radius: 50%;
+      background: linear-gradient(135deg, #2a1040, #0d2a40);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      overflow: hidden;
+    }
+    .avatar-inner img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      border-radius: 50%;
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem;
+    }
+    .skill-tag {
+      padding: .3rem .9rem;
+      border-radius: 999px;
+      font-size: .8rem; font-weight: 600;
+      border: 1px solid transparent;
+    }
+    .skill-tag.pink   { border-color: var(--pink);   color: var(--pink);   background: rgba(255,63,158,.08); }
+    .skill-tag.cyan   { border-color: var(--cyan);   color: var(--cyan);   background: rgba(0,229,255,.08); }
+    .skill-tag.yellow { border-color: var(--yellow); color: var(--yellow); background: rgba(255,233,77,.08); }
+    .skill-tag.purple { border-color: var(--purple); color: var(--purple); background: rgba(168,85,247,.08); }
+    .skill-tag.green  { border-color: var(--green);  color: var(--green);  background: rgba(57,229,122,.08); }
+    .skill-tag.orange { border-color: var(--orange); color: var(--orange); background: rgba(255,126,63,.08); }
 
-  /* FOOTER */
-  footer { background: var(--amber-900); margin-top: 12px; padding: 32px 20px; }
-  .footer-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-  .footer-logo { font-size: 18px; font-weight: 700; color: var(--amber-50); }
-  .footer-tag { font-size: 12px; color: var(--amber-200); margin-top: 5px; }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 12px; color: var(--amber-100); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--amber-50); }
+    /* ===== WORKS ===== */
+    #works { position: relative; }
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem; margin-top: .5rem;
+    }
+    .work-card {
+      border-radius: 20px; overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+    .work-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+    .work-thumb {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      position: relative; overflow: hidden;
+    }
+    .work-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.25);
+    }
+    .work-body { padding: 1.4rem 1.6rem 1.8rem; }
+    .work-category {
+      font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; margin-bottom: .4rem;
+    }
+    .work-title { font-size: 1.1rem; font-weight: 800; margin-bottom: .5rem; }
+    .work-desc { font-size: .875rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .work-tags { display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .work-tag {
+      font-size: .7rem; font-weight: 600;
+      padding: .2rem .65rem; border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.6);
+    }
 
-  @media (max-width: 600px) {
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-    .nav-links { display: none; }
-    .hero h1 { font-size: 34px; }
-    .hero-content { padding: 32px 20px 40px; }
-    .symbol-card { padding: 24px; }
-    .kentei-card { padding: 20px; }
-  }
-</style>
+    /* ===== STATS ===== */
+    #stats {
+      background: linear-gradient(135deg, rgba(255,63,158,0.08) 0%, rgba(0,229,255,0.08) 100%);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 4rem 2rem;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+      text-align: center;
+    }
+    @media(max-width:640px){ .stats-grid { grid-template-columns: repeat(2,1fr); } }
+    .stat-num {
+      font-size: 3rem; font-weight: 900;
+      background: linear-gradient(90deg, var(--pink), var(--yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: .85rem; color: rgba(255,255,255,0.5); margin-top: .3rem; }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      text-align: center;
+      background: linear-gradient(180deg, rgba(168,85,247,0.05) 0%, transparent 100%);
+    }
+    .contact-card {
+      max-width: 600px; margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px; padding: 3rem;
+    }
+    .contact-icon {
+      font-size: 3.5rem; display: block; margin-bottom: 1.2rem;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+    @keyframes wiggle { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)} }
+    .contact-title { font-size: 1.8rem; font-weight: 900; margin-bottom: .8rem; }
+    .contact-sub { color: rgba(255,255,255,0.55); margin-bottom: 2rem; line-height: 1.7; }
+    .social-row {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .social-btn {
+      padding: .6rem 1.4rem;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      text-decoration: none; font-size: .85rem; font-weight: 600;
+      transition: all .2s;
+    }
+    .social-btn:hover { border-color: var(--pink); color: var(--pink); background: rgba(255,63,158,0.08); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center; padding: 2rem;
+      color: rgba(255,255,255,0.25); font-size: .8rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer span {
+      background: linear-gradient(90deg, var(--pink), var(--yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Confetti burst (decorative elements) */
+    .confetti-row {
+      display: flex; justify-content: center; gap: 1rem;
+      flex-wrap: wrap; margin-top: 2rem;
+      font-size: 1.8rem;
+      animation: fadeInUp .7s ease .4s both;
+    }
+    .confetti-row span {
+      display: inline-block;
+      animation: float-emoji 3s ease-in-out infinite;
+    }
+    .confetti-row span:nth-child(2) { animation-delay: .4s; }
+    .confetti-row span:nth-child(3) { animation-delay: .8s; }
+    .confetti-row span:nth-child(4) { animation-delay: 1.2s; }
+    .confetti-row span:nth-child(5) { animation-delay: 1.6s; }
+    @keyframes float-emoji {
+      0%,100%{ transform: translateY(0) rotate(0deg); }
+      50%{ transform: translateY(-10px) rotate(8deg); }
+    }
+
+    /* Ticket decoration */
+    .ticket {
+      display: inline-flex; align-items: center; gap: .6rem;
+      padding: .6rem 1.4rem;
+      background: linear-gradient(135deg, rgba(255,233,77,.12), rgba(255,63,158,.12));
+      border: 1.5px dashed rgba(255,233,77,0.4);
+      border-radius: 12px; margin-bottom: 1rem;
+      font-size: .85rem; color: var(--yellow); font-weight: 600;
+    }
+  </style>
 </head>
 <body>
 
+<!-- ===== NAV ===== -->
 <nav>
-  <div class="nav-inner">
-    <div class="nav-logo"><span class="q">?</span> なんすかランド</div>
-    <div class="nav-links">
-      <a href="#areas">エリア</a>
-      <a href="#attractions">アトラクション</a>
-      <a href="#kentei">なんすか検定</a>
-      <a href="#tickets">チケット</a>
-    </div>
-  </div>
+  <div class="nav-logo">✦ Ryokichi</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-<section class="hero">
-  <img class="hero-img" src="image.png" alt="なんすかランド メインビジュアル">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">THE NANSUKA OJISAN THEME PARK</div>
-    <h1>なんすか、ここは。</h1>
-    <p class="hero-desc">日本中で体験したことのある、あの瞬間を<br>テーマパークにしてしまいました。</p>
-    <div class="hero-pill">「...なんすか？」</div>
-    <div class="hero-btns">
-      <button class="btn-main">チケットを買う</button>
-      <button class="btn-sub">エリアを見る</button>
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <!-- Animated orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <!-- Stars canvas -->
+  <canvas class="stars-canvas" id="stars"></canvas>
+
+  <!-- Hero floating image -->
+  <div style="
+    position:absolute; right: 5%; bottom: 0; z-index:1;
+    width: clamp(200px, 28vw, 380px);
+    animation: fadeInUp .9s ease .3s both;
+    pointer-events:none;
+  ">
+    <img src="image.png" alt="Ryokichi" style="
+      width:100%; display:block;
+      filter: drop-shadow(0 20px 60px rgba(255,63,158,0.4));
+      border-radius: 24px;
+    " />
+  </div>
+
+  <div class="hero-content" style="margin-right: clamp(0px, 30vw, 420px);">
+    <div class="badge">🎡 Welcome to my Creative World</div>
+    <h1 class="hero-title">
+      Hello, I'm<br>
+      <span class="line-grad">Ryokichi</span>
+    </h1>
+    <p class="hero-sub">
+      デザインは遊び場。アイデアを形にするクリエイティブデザイナー。<br>
+      UI/UX・ブランディング・グラフィックで世界をカラフルに。
+    </p>
+    <div class="hero-buttons">
+      <a href="#works" class="btn-primary">🎠 作品を見る</a>
+      <a href="#contact" class="btn-outline">✉ 連絡する</a>
+    </div>
+    <div class="confetti-row">
+      <span>🎨</span><span>✨</span><span>🎡</span><span>🎪</span><span>🌈</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-avatar">
+        <div class="avatar-ring"></div>
+        <div class="avatar-inner">
+          <img src="image.png" alt="Ryokichi" />
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="section-tag">About Me</span>
+        <h2 class="section-title">テーマは<br>「楽しさ × 本質」</h2>
+        <div class="divider"></div>
+        <div class="ticket">🎟 Designer & Creative Director</div>
+        <p class="section-desc">
+          デザインで人を笑顔にすることが使命。テーマパークのような「ワクワク感」と、しっかりとした「機能美」を融合させたデザインを追求しています。<br><br>
+          ユーザーの気持ちに寄り添い、視覚的な体験を丁寧に設計します。
+        </p>
+        <div class="skill-tags" style="margin-top:1.5rem">
+          <span class="skill-tag pink">UI / UX Design</span>
+          <span class="skill-tag cyan">Figma</span>
+          <span class="skill-tag yellow">Branding</span>
+          <span class="skill-tag purple">Motion Design</span>
+          <span class="skill-tag green">Illustration</span>
+          <span class="skill-tag orange">Graphic Design</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="stats-row">
-  <div class="stat-c"><div class="stat-n">?回</div><div class="stat-l">1日の平均なんすか</div></div>
-  <div class="stat-c"><div class="stat-n">5</div><div class="stat-l">エリア構成</div></div>
-  <div class="stat-c"><div class="stat-n">9割</div><div class="stat-l">「わかった（わかってない）」率</div></div>
-  <div class="stat-c"><div class="stat-n">0</div><div class="stat-l">悪気</div></div>
-</div>
-
-<div class="container">
-
-  <section class="section" id="areas">
-    <div class="sec-head">
-      <div class="sec-tag">AREAS</div>
-      <h2>エリア構成</h2>
-      <p>説明不足と的外れな解釈が生む、3つの世界</p>
-    </div>
-    <div class="areas-grid">
-      <div class="area-card">
-        <div class="area-header">
-          <div class="area-icon">🏪</div>
-          <div><h3>キキカエス・ストリート</h3><div class="sub">なんすかおじさんが店員の商店街</div></div>
-        </div>
-        <div class="area-body">
-          <ul class="area-list">
-            <li>何を注文しても「つまり〜ってことなんすか？」と聞き返してくる</li>
-            <li>省略された地図で目的の店にたどり着けない</li>
-            <li>店員同士も「なんすか？」「いや、だからなんすか？」で永遠に終わらない</li>
-          </ul>
-          <div class="area-special">名物グルメ：<b>なんすかソフト</b>（何味かは最後まで教えてもらえない）</div>
-        </div>
+<!-- ===== STATS ===== -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal">
+        <div class="stat-num" data-target="48">0</div>
+        <div class="stat-label">Projects Completed</div>
       </div>
-      <div class="area-card">
-        <div class="area-header">
-          <div class="area-icon">🚪</div>
-          <div><h3>ダルガラミ・ゾーン</h3><div class="sub">帰ろうとするたびに出現する脱出不可エリア</div></div>
-        </div>
-        <div class="area-body">
-          <ul class="area-list">
-            <li>出口の場所を聞くと「あっちですよ」とだけ言って去る</li>
-            <li>脱出ゲームの指示書が「あとはわかりますよね？」で終わってる</li>
-            <li>NPCのおじさんが都合よく現れ、都合よく消える</li>
-          </ul>
-          <div class="area-special">クリア条件：<b>誰も把握していない</b></div>
-        </div>
+      <div class="reveal">
+        <div class="stat-num" data-target="5">0</div>
+        <div class="stat-label">Years Experience</div>
       </div>
-      <div class="area-card">
-        <div class="area-header">
-          <div class="area-icon">🌲</div>
-          <div><h3>ムシ・フォレスト</h3><div class="sub">無視されるのに都合よく上から目線で現れる森</div></div>
-        </div>
-        <div class="area-body">
-          <ul class="area-list">
-            <li>呼びかけると「…なんすか？」と遠くから返ってくる（近づいてはくれない）</li>
-            <li>都合のいい瞬間だけ「まあ、そういうもんですよね」と現れる</li>
-            <li>4Dシアターで「それはちょっと違いますね」を360度サラウンド体感</li>
-          </ul>
-          <div class="area-special">フォトスポット：<b>スルー撮影ブース</b>（無視されてる瞬間を記念撮影）</div>
-        </div>
+      <div class="reveal">
+        <div class="stat-num" data-target="32">0</div>
+        <div class="stat-label">Happy Clients</div>
       </div>
-    </div>
-  </section>
-
-  <section class="section" id="attractions">
-    <div class="sec-head">
-      <div class="sec-tag">MAIN ATTRACTIONS</div>
-      <h2>メインアトラクション</h2>
-      <p>振り回されに来てください</p>
-    </div>
-    <div class="main-attractions">
-      <div class="main-card">
-        <div class="main-thumb mc1">🎢</div>
-        <div class="main-body">
-          <h3>なんすかコースター × ズレた解釈ライド</h3>
-          <div class="catch">「降りた後、あなたが『なんすか？』になる。」</div>
-          <ul class="main-list">
-            <li>乗車前の案内が途中から省略されて終わる</li>
-            <li>「右に曲がります」のアナウンスで左に曲がる</li>
-            <li>降りた瞬間に係員から「どうでしたか？」→「え？なんすか？」</li>
-          </ul>
-        </div>
+      <div class="reveal">
+        <div class="stat-num" data-target="8">0</div>
+        <div class="stat-label">Design Awards</div>
       </div>
-      <div class="main-card">
-        <div class="main-thumb mc2">🎡</div>
-        <div class="main-body">
-          <h3>オヂサン談義ホイール</h3>
-          <div class="catch">「降りた頃にはHPゼロ。」</div>
-          <ul class="main-list">
-            <li>乗車時間：約20分（昔話は30分以上ある）</li>
-            <li>「昔はよかった」「あの頃はね〜」が無限ループ</li>
-            <li>降りる直前に「あ、そういえばなんすか？」で振り出しに戻る</li>
-          </ul>
-          <div class="caution">⚠️ 注意：精神的ダメージにより途中下車はできません</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="symbol-card">
-      <div class="symbol-left">
-        <div class="sym-tag">SYMBOL ATTRACTION</div>
-        <h3>オヂサン談義ホイール<br>詳細スペック</h3>
-        <p>なんすかランドのシンボル。乗った全員が、降りる頃には「あれ、私がなんすか？」という状態になって出てきます。</p>
-      </div>
-      <div class="symbol-right">
-        <div class="sym-stat"><div class="sym-num">20分</div><div class="sym-label">乗車時間</div></div>
-        <div class="sym-stat"><div class="sym-num">30分+</div><div class="sym-label">昔話の長さ</div></div>
-        <div class="sym-stat"><div class="sym-num">0</div><div class="sym-label">途中下車の可能性</div></div>
-        <div class="sym-stat"><div class="sym-num">HP 0</div><div class="sym-label">降車後の状態</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="kentei">
-    <div class="sec-head">
-      <div class="sec-tag">CERTIFICATE</div>
-      <h2>なんすか検定センター</h2>
-      <p>「なんすか」を極めし者に与えられる、謎の資格</p>
-    </div>
-    <div class="kentei-card">
-      <div class="kentei-left">
-        <h3>なんすか検定 公式認定</h3>
-        <p>級が上がるほど「なんすか？」の使い方が上達する謎の資格制度。合格証には「まあ、合格ってことですよね」という文面が書かれています。</p>
-      </div>
-      <div class="kentei-right">
-        <div class="grade"><div><div class="grade-name">3級</div><div class="grade-desc">「なんすか？」を言える</div></div><div class="grade-badge">入門</div></div>
-        <div class="grade"><div><div class="grade-name">2級</div><div class="grade-desc">説明を省略できる</div></div><div class="grade-badge">中級</div></div>
-        <div class="grade"><div><div class="grade-name">1級</div><div class="grade-desc">「なんすか」を言わずに煙に巻く</div></div><div class="grade-badge">上級</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="tickets">
-    <div class="sec-head">
-      <div class="sec-tag">TICKETS</div>
-      <h2>チケット・料金</h2>
-      <p>「料金ってなんすか？」と聞かれてもちゃんと答えます</p>
-    </div>
-    <div class="tickets-grid">
-      <div class="tkt-card">
-        <div class="tkt-badge">なんすかパス</div>
-        <div class="tkt-name">スタンダード</div>
-        <div class="tkt-price">¥3,900 <span>/ 人</span></div>
-        <ul class="tkt-features">
-          <li><span class="ck">✓</span>全エリア入場</li>
-          <li><span class="ck">✓</span>基本アトラクション利用</li>
-          <li><span class="ck">✓</span>なんすか認定証（紙）</li>
-        </ul>
-        <button class="btn-tkt g">購入する</button>
-      </div>
-      <div class="tkt-card feat">
-        <div class="tkt-badge hot">いちばん人気</div>
-        <div class="tkt-name">フルなんすか</div>
-        <div class="tkt-price">¥6,500 <span>/ 人</span></div>
-        <ul class="tkt-features">
-          <li><span class="ck">✓</span>全アトラクション優先入場</li>
-          <li><span class="ck">✓</span>おじさんとの記念撮影</li>
-          <li><span class="ck">✓</span>眼鏡型ソuvenir付き</li>
-          <li><span class="ck">✓</span>なんすか検定受験権</li>
-        </ul>
-        <button class="btn-tkt p">購入する</button>
-      </div>
-      <div class="tkt-card">
-        <div class="tkt-badge">グループ</div>
-        <div class="tkt-name">職場グループ5名〜</div>
-        <div class="tkt-price">¥2,800 <span>/ 人〜</span></div>
-        <ul class="tkt-features">
-          <li><span class="ck">✓</span>あるある共感保証</li>
-          <li><span class="ck">✓</span>チームビルディング体験</li>
-          <li><span class="ck">✓</span>「わかるわかる」タオル付き</li>
-        </ul>
-        <button class="btn-tkt g">購入する</button>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">? なんすかランド</div>
-      <div class="footer-tag">悪気はない。でも振り回される。— since 2024</div>
-    </div>
-    <div class="footer-links">
-      <a href="#">アクセス</a>
-      <a href="#">なんすか？</a>
-      <a href="#">お問い合わせ</a>
     </div>
   </div>
+</section>
+
+<!-- ===== WORKS ===== -->
+<section id="works">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Works</span>
+      <h2 class="section-title">作品ギャラリー</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="works-grid">
+
+      <div class="work-card reveal">
+        <div class="work-thumb" style="background: linear-gradient(135deg,#ff3f9e,#a855f7)">🎡</div>
+        <div class="work-body">
+          <div class="work-category" style="color:var(--pink)">UI / UX Design</div>
+          <div class="work-title">Wonder App</div>
+          <div class="work-desc">テーマパーク向けの旅行計画アプリ。楽しさを最大化するUX設計。</div>
+          <div class="work-tags">
+            <span class="work-tag">Figma</span>
+            <span class="work-tag">Prototyping</span>
+            <span class="work-tag">UX Research</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="work-thumb" style="background: linear-gradient(135deg,#ffe94d,#ff7e3f)">🎪</div>
+        <div class="work-body">
+          <div class="work-category" style="color:var(--yellow)">Branding</div>
+          <div class="work-title">Carnival Brand</div>
+          <div class="work-desc">フェスティバルイベントのビジュアルアイデンティティを一から構築。</div>
+          <div class="work-tags">
+            <span class="work-tag">Logo</span>
+            <span class="work-tag">Identity</span>
+            <span class="work-tag">Typography</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="work-thumb" style="background: linear-gradient(135deg,#00e5ff,#39e57a)">🌈</div>
+        <div class="work-body">
+          <div class="work-category" style="color:var(--cyan)">Illustration</div>
+          <div class="work-title">Rainbow World</div>
+          <div class="work-desc">絵本スタイルのキャラクターイラストシリーズ。子供向けコンテンツに活用。</div>
+          <div class="work-tags">
+            <span class="work-tag">Procreate</span>
+            <span class="work-tag">Illustration</span>
+            <span class="work-tag">Characters</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="work-thumb" style="background: linear-gradient(135deg,#a855f7,#ff3f9e)">✨</div>
+        <div class="work-body">
+          <div class="work-category" style="color:var(--purple)">Motion Design</div>
+          <div class="work-title">Magic Motion</div>
+          <div class="work-desc">ブランドアニメーションとウェブサイトのインタラクション設計。</div>
+          <div class="work-tags">
+            <span class="work-tag">After Effects</span>
+            <span class="work-tag">Lottie</span>
+            <span class="work-tag">GSAP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="work-thumb" style="background: linear-gradient(135deg,#39e57a,#00e5ff)">🎨</div>
+        <div class="work-body">
+          <div class="work-category" style="color:var(--green)">Graphic Design</div>
+          <div class="work-title">Neon Poster Series</div>
+          <div class="work-desc">ネオンカラーを使ったイベントポスターシリーズ。SNSで5万インプレッション達成。</div>
+          <div class="work-tags">
+            <span class="work-tag">Photoshop</span>
+            <span class="work-tag">Illustrator</span>
+            <span class="work-tag">Print</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" style="border-style:dashed; display:flex; align-items:center; justify-content:center; min-height:320px;">
+        <div style="text-align:center; padding:2rem; color:rgba(255,255,255,0.3)">
+          <div style="font-size:3rem; margin-bottom:1rem">➕</div>
+          <div style="font-weight:700">More Coming Soon</div>
+          <div style="font-size:.85rem; margin-top:.5rem">新しいプロジェクトを追加予定</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="contact-card">
+        <span class="contact-icon">🎠</span>
+        <h2 class="contact-title">一緒に何か作りませんか？</h2>
+        <p class="contact-sub">
+          新しいプロジェクト、コラボレーション、お仕事のご依頼など<br>
+          どんなことでもお気軽にご連絡ください！
+        </p>
+        <a href="mailto:hello@example.com" class="btn-primary" style="display:inline-block">
+          📧 メールを送る
+        </a>
+        <div class="social-row">
+          <a href="#" class="social-btn">🐦 Twitter</a>
+          <a href="#" class="social-btn">📸 Instagram</a>
+          <a href="#" class="social-btn">💼 Behance</a>
+          <a href="#" class="social-btn">🐙 GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2026 <span>Ryokichi</span> · Made with 🎨 &amp; ✨ · <a href="https://ryokokoyanagi-a11y.github.io" style="color:inherit;text-decoration:none;">ryokokoyanagi-a11y.github.io</a></p>
 </footer>
 
+<!-- ===== SCRIPTS ===== -->
+<script>
+  /* --- Stars canvas --- */
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+
+  function initStars() {
+    stars = Array.from({ length: 120 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random(),
+      speed: Math.random() * 0.005 + 0.002
+    }));
+  }
+  initStars();
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.a += s.speed;
+      const alpha = (Math.sin(s.a) + 1) / 2;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha * 0.8})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  /* --- Scroll reveal --- */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  /* --- Count-up animation --- */
+  const statNums = document.querySelectorAll('.stat-num[data-target]');
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = +el.dataset.target;
+        let current = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current + (target > 10 ? '+' : '');
+          if (current >= target) clearInterval(timer);
+        }, 40);
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => countObserver.observe(el));
+
+  /* --- Cursor glow effect --- */
+  const glow = document.createElement('div');
+  Object.assign(glow.style, {
+    position: 'fixed', width: '300px', height: '300px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(255,63,158,0.12) 0%, transparent 70%)',
+    pointerEvents: 'none', zIndex: '9999',
+    transform: 'translate(-50%,-50%)',
+    transition: 'left .12s ease, top .12s ease'
+  });
+  document.body.appendChild(glow);
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
+  });
+</script>
 </body>
 </html>
