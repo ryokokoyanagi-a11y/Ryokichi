@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なんすかランド — THE NANSUKA OJISAN THEME PARK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber-50: #FAEEDA;
+    --amber-100: #FAC775;
+    --amber-200: #EF9F27;
+    --amber-400: #BA7517;
+    --amber-600: #854F0B;
+    --amber-800: #633806;
+    --amber-900: #412402;
+    --bg: #FFF9F0;
+    --card: #ffffff;
+    --text: #2C2320;
+    --text-sub: #7A6255;
+    --border: rgba(65,36,2,0.12);
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Zen Maru Gothic', sans-serif; font-size: 15px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* NAV */
+  nav { background: var(--amber-900); padding: 0 20px; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-logo { font-size: 18px; font-weight: 700; color: var(--amber-50); letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; }
+  .nav-logo .q { color: var(--amber-200); font-size: 22px; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a { color: var(--amber-100); font-size: 12px; text-decoration: none; padding: 6px 12px; border-radius: var(--radius-md); transition: background 0.2s; }
+  .nav-links a:hover { background: rgba(255,255,255,0.12); color: var(--amber-50); }
+
+  /* HERO */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: 520px;
+    display: flex; align-items: flex-end;
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(65,36,2,0.92) 0%, rgba(65,36,2,0.5) 40%, rgba(65,36,2,0.1) 70%, transparent 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    width: 100%; padding: 48px 40px 52px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(239,159,39,0.85); color: var(--amber-900);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    padding: 5px 18px; border-radius: 999px; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 52px; font-weight: 700; color: #fff;
+    line-height: 1.15; margin-bottom: 12px;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.5);
+  }
+  .hero-desc { font-size: 16px; color: rgba(255,255,255,0.9); max-width: 480px; margin: 0 auto 12px; line-height: 1.8; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+  .hero-pill {
+    display: inline-block;
+    background: var(--amber-200); color: var(--amber-900);
+    font-size: 22px; font-weight: 700;
+    padding: 8px 28px; border-radius: 999px;
+    margin: 10px 0 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    animation: pillpop 2s ease-in-out infinite alternate;
+  }
+  @keyframes pillpop { from { transform: scale(1); } to { transform: scale(1.04); } }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-main { background: var(--amber-200); color: var(--amber-900); font-size: 15px; font-weight: 700; font-family: inherit; padding: 14px 32px; border-radius: 999px; border: none; cursor: pointer; transition: transform 0.15s; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+  .btn-main:hover { transform: translateY(-2px); }
+  .btn-sub { background: rgba(255,255,255,0.15); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; padding: 14px 32px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; backdrop-filter: blur(4px); transition: background 0.2s; }
+  .btn-sub:hover { background: rgba(255,255,255,0.25); }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 900px; margin: 16px auto; padding: 0 20px; }
+  .stat-c { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 10px; text-align: center; }
+  .stat-n { font-size: 26px; font-weight: 700; color: var(--amber-400); }
+  .stat-l { font-size: 11px; color: var(--text-sub); margin-top: 4px; line-height: 1.5; }
+
+  /* SECTIONS */
+  .section { padding: 52px 0 24px; }
+  .sec-head { text-align: center; margin-bottom: 28px; }
+  .sec-tag { display: inline-block; background: var(--amber-50); color: var(--amber-600); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; padding: 4px 14px; border-radius: 999px; margin-bottom: 10px; border: 1px solid rgba(133,79,11,0.2); }
+  .sec-head h2 { font-size: 26px; font-weight: 700; color: var(--text); }
+  .sec-head p { font-size: 13px; color: var(--text-sub); margin-top: 6px; }
+
+  /* AREAS */
+  .areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .area-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .area-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(65,36,2,0.1); }
+  .area-header { padding: 18px 18px 12px; display: flex; gap: 14px; align-items: flex-start; }
+  .area-icon { font-size: 30px; flex-shrink: 0; }
+  .area-header h3 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .area-header .sub { font-size: 11px; color: var(--text-sub); line-height: 1.5; }
+  .area-body { padding: 0 18px 16px; }
+  .area-list { list-style: none; }
+  .area-list li { font-size: 12px; color: var(--text-sub); padding: 5px 0; border-top: 1px solid var(--border); display: flex; gap: 7px; align-items: flex-start; line-height: 1.6; }
+  .area-list li::before { content: '?'; color: var(--amber-200); font-weight: 700; flex-shrink: 0; }
+  .area-special { margin-top: 10px; background: var(--amber-50); border-radius: var(--radius-md); padding: 8px 12px; font-size: 11px; color: var(--amber-600); font-weight: 500; border: 1px solid rgba(133,79,11,0.15); }
+  .area-special b { color: var(--amber-900); }
+
+  /* ATTRACTIONS */
+  .main-attractions { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .main-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .main-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(65,36,2,0.1); }
+  .main-thumb { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 44px; }
+  .mc1 { background: var(--amber-200); }
+  .mc2 { background: var(--amber-100); }
+  .main-body { padding: 18px; }
+  .main-body h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+  .catch { font-size: 13px; font-weight: 700; color: var(--amber-400); margin-bottom: 10px; font-style: italic; }
+  .main-list { list-style: none; }
+  .main-list li { font-size: 12px; color: var(--text-sub); padding: 5px 0; border-top: 1px solid var(--border); display: flex; gap: 7px; line-height: 1.6; }
+  .main-list li::before { content: '→'; color: var(--amber-200); font-weight: 700; flex-shrink: 0; }
+  .caution { margin-top: 12px; background: var(--amber-100); border-radius: var(--radius-md); padding: 8px 12px; font-size: 11px; color: var(--amber-800); font-weight: 500; }
+
+  /* SYMBOL */
+  .symbol-card { background: var(--amber-900); border-radius: var(--radius-xl); padding: 36px 40px; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+  .symbol-left { flex: 1; min-width: 200px; }
+  .sym-tag { display: inline-block; background: var(--amber-200); color: var(--amber-900); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }
+  .symbol-left h3 { font-size: 22px; font-weight: 700; color: var(--amber-50); line-height: 1.4; margin-bottom: 10px; }
+  .symbol-left p { font-size: 13px; color: var(--amber-100); line-height: 1.8; }
+  .symbol-right { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 220px; }
+  .sym-stat { background: rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+  .sym-num { font-size: 22px; font-weight: 700; color: var(--amber-100); }
+  .sym-label { font-size: 11px; color: var(--amber-200); margin-top: 4px; line-height: 1.4; }
+
+  /* KENTEI */
+  .kentei-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 28px 32px; display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .kentei-left { flex: 1; min-width: 200px; }
+  .kentei-left h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .kentei-left p { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+  .kentei-right { display: flex; flex-direction: column; gap: 8px; min-width: 220px; }
+  .grade { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .grade-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .grade-desc { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+  .grade-badge { font-size: 11px; background: var(--amber-50); color: var(--amber-600); padding: 3px 10px; border-radius: 999px; font-weight: 700; flex-shrink: 0; border: 1px solid rgba(133,79,11,0.2); }
+
+  /* TICKETS */
+  .tickets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .tkt-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 24px 20px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+  .tkt-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(65,36,2,0.1); }
+  .tkt-card.feat { border: 2.5px solid var(--amber-200); }
+  .tkt-badge { display: inline-block; background: var(--amber-50); color: var(--amber-600); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 10px; border: 1px solid rgba(133,79,11,0.2); }
+  .tkt-badge.hot { background: var(--amber-100); color: var(--amber-800); }
+  .tkt-name { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .tkt-price { font-size: 34px; font-weight: 700; color: var(--amber-400); }
+  .tkt-price span { font-size: 13px; color: var(--text-sub); font-weight: 400; }
+  .tkt-features { list-style: none; margin: 14px 0; text-align: left; }
+  .tkt-features li { font-size: 12px; color: var(--text-sub); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 7px; line-height: 1.5; }
+  .tkt-features li:last-child { border-bottom: none; }
+  .ck { color: var(--amber-400); font-size: 13px; flex-shrink: 0; font-weight: 700; }
+  .btn-tkt { width: 100%; padding: 12px; border-radius: 999px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: transform 0.15s; border: none; }
+  .btn-tkt:hover { transform: scale(1.02); }
+  .btn-tkt.p { background: var(--amber-200); color: var(--amber-900); }
+  .btn-tkt.g { background: transparent; color: var(--amber-400); border: 2px solid var(--amber-400); }
+
+  /* FOOTER */
+  footer { background: var(--amber-900); margin-top: 12px; padding: 32px 20px; }
+  .footer-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .footer-logo { font-size: 18px; font-weight: 700; color: var(--amber-50); }
+  .footer-tag { font-size: 12px; color: var(--amber-200); margin-top: 5px; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: var(--amber-100); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--amber-50); }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 34px; }
+    .hero-content { padding: 32px 20px 40px; }
+    .symbol-card { padding: 24px; }
+    .kentei-card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="q">?</span> なんすかランド</div>
+    <div class="nav-links">
+      <a href="#areas">エリア</a>
+      <a href="#attractions">アトラクション</a>
+      <a href="#kentei">なんすか検定</a>
+      <a href="#tickets">チケット</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <img class="hero-img" src="image.png" alt="なんすかランド メインビジュアル">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">THE NANSUKA OJISAN THEME PARK</div>
+    <h1>なんすか、ここは。</h1>
+    <p class="hero-desc">日本中で体験したことのある、あの瞬間を<br>テーマパークにしてしまいました。</p>
+    <div class="hero-pill">「...なんすか？」</div>
+    <div class="hero-btns">
+      <button class="btn-main">チケットを買う</button>
+      <button class="btn-sub">エリアを見る</button>
+    </div>
+  </div>
+</section>
+
+<div class="stats-row">
+  <div class="stat-c"><div class="stat-n">?回</div><div class="stat-l">1日の平均なんすか</div></div>
+  <div class="stat-c"><div class="stat-n">5</div><div class="stat-l">エリア構成</div></div>
+  <div class="stat-c"><div class="stat-n">9割</div><div class="stat-l">「わかった（わかってない）」率</div></div>
+  <div class="stat-c"><div class="stat-n">0</div><div class="stat-l">悪気</div></div>
+</div>
+
+<div class="container">
+
+  <section class="section" id="areas">
+    <div class="sec-head">
+      <div class="sec-tag">AREAS</div>
+      <h2>エリア構成</h2>
+      <p>説明不足と的外れな解釈が生む、3つの世界</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-icon">🏪</div>
+          <div><h3>キキカエス・ストリート</h3><div class="sub">なんすかおじさんが店員の商店街</div></div>
+        </div>
+        <div class="area-body">
+          <ul class="area-list">
+            <li>何を注文しても「つまり〜ってことなんすか？」と聞き返してくる</li>
+            <li>省略された地図で目的の店にたどり着けない</li>
+            <li>店員同士も「なんすか？」「いや、だからなんすか？」で永遠に終わらない</li>
+          </ul>
+          <div class="area-special">名物グルメ：<b>なんすかソフト</b>（何味かは最後まで教えてもらえない）</div>
+        </div>
+      </div>
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-icon">🚪</div>
+          <div><h3>ダルガラミ・ゾーン</h3><div class="sub">帰ろうとするたびに出現する脱出不可エリア</div></div>
+        </div>
+        <div class="area-body">
+          <ul class="area-list">
+            <li>出口の場所を聞くと「あっちですよ」とだけ言って去る</li>
+            <li>脱出ゲームの指示書が「あとはわかりますよね？」で終わってる</li>
+            <li>NPCのおじさんが都合よく現れ、都合よく消える</li>
+          </ul>
+          <div class="area-special">クリア条件：<b>誰も把握していない</b></div>
+        </div>
+      </div>
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-icon">🌲</div>
+          <div><h3>ムシ・フォレスト</h3><div class="sub">無視されるのに都合よく上から目線で現れる森</div></div>
+        </div>
+        <div class="area-body">
+          <ul class="area-list">
+            <li>呼びかけると「…なんすか？」と遠くから返ってくる（近づいてはくれない）</li>
+            <li>都合のいい瞬間だけ「まあ、そういうもんですよね」と現れる</li>
+            <li>4Dシアターで「それはちょっと違いますね」を360度サラウンド体感</li>
+          </ul>
+          <div class="area-special">フォトスポット：<b>スルー撮影ブース</b>（無視されてる瞬間を記念撮影）</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="attractions">
+    <div class="sec-head">
+      <div class="sec-tag">MAIN ATTRACTIONS</div>
+      <h2>メインアトラクション</h2>
+      <p>振り回されに来てください</p>
+    </div>
+    <div class="main-attractions">
+      <div class="main-card">
+        <div class="main-thumb mc1">🎢</div>
+        <div class="main-body">
+          <h3>なんすかコースター × ズレた解釈ライド</h3>
+          <div class="catch">「降りた後、あなたが『なんすか？』になる。」</div>
+          <ul class="main-list">
+            <li>乗車前の案内が途中から省略されて終わる</li>
+            <li>「右に曲がります」のアナウンスで左に曲がる</li>
+            <li>降りた瞬間に係員から「どうでしたか？」→「え？なんすか？」</li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-card">
+        <div class="main-thumb mc2">🎡</div>
+        <div class="main-body">
+          <h3>オヂサン談義ホイール</h3>
+          <div class="catch">「降りた頃にはHPゼロ。」</div>
+          <ul class="main-list">
+            <li>乗車時間：約20分（昔話は30分以上ある）</li>
+            <li>「昔はよかった」「あの頃はね〜」が無限ループ</li>
+            <li>降りる直前に「あ、そういえばなんすか？」で振り出しに戻る</li>
+          </ul>
+          <div class="caution">⚠️ 注意：精神的ダメージにより途中下車はできません</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="symbol-card">
+      <div class="symbol-left">
+        <div class="sym-tag">SYMBOL ATTRACTION</div>
+        <h3>オヂサン談義ホイール<br>詳細スペック</h3>
+        <p>なんすかランドのシンボル。乗った全員が、降りる頃には「あれ、私がなんすか？」という状態になって出てきます。</p>
+      </div>
+      <div class="symbol-right">
+        <div class="sym-stat"><div class="sym-num">20分</div><div class="sym-label">乗車時間</div></div>
+        <div class="sym-stat"><div class="sym-num">30分+</div><div class="sym-label">昔話の長さ</div></div>
+        <div class="sym-stat"><div class="sym-num">0</div><div class="sym-label">途中下車の可能性</div></div>
+        <div class="sym-stat"><div class="sym-num">HP 0</div><div class="sym-label">降車後の状態</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kentei">
+    <div class="sec-head">
+      <div class="sec-tag">CERTIFICATE</div>
+      <h2>なんすか検定センター</h2>
+      <p>「なんすか」を極めし者に与えられる、謎の資格</p>
+    </div>
+    <div class="kentei-card">
+      <div class="kentei-left">
+        <h3>なんすか検定 公式認定</h3>
+        <p>級が上がるほど「なんすか？」の使い方が上達する謎の資格制度。合格証には「まあ、合格ってことですよね」という文面が書かれています。</p>
+      </div>
+      <div class="kentei-right">
+        <div class="grade"><div><div class="grade-name">3級</div><div class="grade-desc">「なんすか？」を言える</div></div><div class="grade-badge">入門</div></div>
+        <div class="grade"><div><div class="grade-name">2級</div><div class="grade-desc">説明を省略できる</div></div><div class="grade-badge">中級</div></div>
+        <div class="grade"><div><div class="grade-name">1級</div><div class="grade-desc">「なんすか」を言わずに煙に巻く</div></div><div class="grade-badge">上級</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tickets">
+    <div class="sec-head">
+      <div class="sec-tag">TICKETS</div>
+      <h2>チケット・料金</h2>
+      <p>「料金ってなんすか？」と聞かれてもちゃんと答えます</p>
+    </div>
+    <div class="tickets-grid">
+      <div class="tkt-card">
+        <div class="tkt-badge">なんすかパス</div>
+        <div class="tkt-name">スタンダード</div>
+        <div class="tkt-price">¥3,900 <span>/ 人</span></div>
+        <ul class="tkt-features">
+          <li><span class="ck">✓</span>全エリア入場</li>
+          <li><span class="ck">✓</span>基本アトラクション利用</li>
+          <li><span class="ck">✓</span>なんすか認定証（紙）</li>
+        </ul>
+        <button class="btn-tkt g">購入する</button>
+      </div>
+      <div class="tkt-card feat">
+        <div class="tkt-badge hot">いちばん人気</div>
+        <div class="tkt-name">フルなんすか</div>
+        <div class="tkt-price">¥6,500 <span>/ 人</span></div>
+        <ul class="tkt-features">
+          <li><span class="ck">✓</span>全アトラクション優先入場</li>
+          <li><span class="ck">✓</span>おじさんとの記念撮影</li>
+          <li><span class="ck">✓</span>眼鏡型ソuvenir付き</li>
+          <li><span class="ck">✓</span>なんすか検定受験権</li>
+        </ul>
+        <button class="btn-tkt p">購入する</button>
+      </div>
+      <div class="tkt-card">
+        <div class="tkt-badge">グループ</div>
+        <div class="tkt-name">職場グループ5名〜</div>
+        <div class="tkt-price">¥2,800 <span>/ 人〜</span></div>
+        <ul class="tkt-features">
+          <li><span class="ck">✓</span>あるある共感保証</li>
+          <li><span class="ck">✓</span>チームビルディング体験</li>
+          <li><span class="ck">✓</span>「わかるわかる」タオル付き</li>
+        </ul>
+        <button class="btn-tkt g">購入する</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">? なんすかランド</div>
+      <div class="footer-tag">悪気はない。でも振り回される。— since 2024</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">アクセス</a>
+      <a href="#">なんすか？</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
